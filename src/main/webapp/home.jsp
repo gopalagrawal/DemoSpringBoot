@@ -3,7 +3,7 @@
 <html>
 
 <body>
-  HELLO WORLD  ... FROM HOME.JSP  ...
+  ${welcomemsg} ${name}
 </body>
 
 </html>
