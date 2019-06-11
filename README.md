@@ -12,4 +12,7 @@ Had to downgrade maven-jar-plugin as follows:
 	
 -------
 
+tomcat-jasper (same version as embedded tomcat in maven dependencies) needs to be added to pom.xml. 
+This converts our jsp's to servlets. 
+
 
