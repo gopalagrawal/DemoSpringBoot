@@ -25,6 +25,10 @@ public class DemoSpringBootApplication {
 		System.out.println( "a => " + a.getAid() + " : " + a.getAname() + " : " + a.getTech() );		
 		System.out.println( "b => " + b.getAid() + " : " + b.getAname() + " : " + b.getTech() );
 		
+		a.setLaptop(1, "Dell");
+		
+		a.show();
+		
 	}
 
 }
