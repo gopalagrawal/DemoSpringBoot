@@ -9,6 +9,8 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home() {
 		System.out.println("WELCOME TO HOME PAGE");
-		return "home.jsp";
+		return "home";  
+		//not mentioning .jsp here since we might move to different tech with diff. extension
+		//instead define the prefix/suffix in application.properties 
 	}
 }
