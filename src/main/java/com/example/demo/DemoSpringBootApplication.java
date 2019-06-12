@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.example.demo.model.Alien;
+
 @SpringBootApplication
 public class DemoSpringBootApplication {
 
@@ -25,9 +27,9 @@ public class DemoSpringBootApplication {
 		System.out.println( "a => " + a.getAid() + " : " + a.getAname() + " : " + a.getTech() );		
 		System.out.println( "b => " + b.getAid() + " : " + b.getAname() + " : " + b.getTech() );
 		
-		a.setLaptop(1, "Dell");
-		
-		a.show();
+//		a.setLaptop(1, "Dell");
+//		
+//		a.show();
 		
 	}
 
