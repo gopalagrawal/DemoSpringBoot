@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"   %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/sql"  prefix = "sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,9 @@
 </head>
 
 <body>
-	<br> Alien Added is:
+
+<!--  DISPLAY DATA FROM DB -----------------------
+	<br> Aliens in DB: 
 	<br> 
 
 <sql:setDataSource
@@ -37,6 +40,26 @@ SELECT * from Alien;
 		</tr>
 	</c:forEach>
 </table>
+-->
+
+<!-- DISPLAYING DATA PASSED TO THIS PAGE -->
+
+Aliens Found: <p>
+
+<c:if test="${fn:length(alienlist) > 0}">
+	<ul>
+		<c:forEach var="alien" items="${alienlist}">
+			<li>${alien.aid} ... ${alien.aname} ... ${alien.tech}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+
+
+
+
+
+
 
 
 

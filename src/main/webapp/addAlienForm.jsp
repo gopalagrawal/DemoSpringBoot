@@ -13,6 +13,15 @@
    	
    	<input type=submit> 
   </form>
+  
+  <hr>
+  
+    <form action="getAlien" method=get>
+  	ID:   <input type=text name="aid">	<br>
+   	<input type=submit> 
+  </form>
+  
+  
 </body>
 
 </html>
