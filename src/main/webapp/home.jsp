@@ -3,7 +3,7 @@
 <html>
 
 <body>
-  ${welcomemsg} ${name}
+  ${welcomemsg} ${alien}
 </body>
 
 </html>

@@ -43,4 +43,11 @@ public class Alien {
 		System.out.println("Alien:Show");
 		laptop.compile();
 	}
+
+	@Override
+	public String toString() {
+		return "Alien [aid=" + aid + ", aname=" + aname + ", tech=" + tech + "]";
+	}
+	
+	
 }
