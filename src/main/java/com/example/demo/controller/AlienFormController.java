@@ -6,10 +6,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -66,7 +68,7 @@ public class AlienFormController {
 		return repo.findAll();  
 	}
 	
-	@RequestMapping("/aliens/{aid}") //By default, a RequestMapping => GetMapping. 
+	@RequestMapping("/alien/{aid}") //By default, a RequestMapping => GetMapping. 
 	@ResponseBody
 	public Optional<Alien> getSpecificAlien(@PathVariable("aid") int aid) {
 		return repo.findById(aid);
@@ -78,12 +80,29 @@ public class AlienFormController {
 		return repo.findByTech(tech);
 	}	
 	
-	@PostMapping(path="/alien")  
+	@PostMapping(path="/alien")  //can also restrict w/... consumes={"application/json"} or xml etc. 
 	@ResponseBody
-	public Alien addAlienUsingRest(Alien alien) {
+	//@RequestBody in params -> accept raw json data in Post request w/ content: application/json
+	public Alien addAlienUsingRest(@RequestBody Alien alien) {
 		System.out.println(alien.toString());
 		repo.save(alien);
 		return alien;
 	}
 	
+	@DeleteMapping("/alien/{aid}")
+	@ResponseBody
+	public String deleteAlien(@PathVariable int aid) {
+		Alien a = repo.getOne(aid);
+		repo.delete(a);
+		return "Deleted";
+	}
+	
+	
+	@PutMapping( path="/alien", consumes="application/json") //for save/update
+	@ResponseBody
+	public Alien updateAlien(@RequestBody Alien newAlien) {
+		System.out.println("upDateAlien: " + newAlien.toString());
+		repo.save(newAlien);
+		return newAlien;
+	}
 }
