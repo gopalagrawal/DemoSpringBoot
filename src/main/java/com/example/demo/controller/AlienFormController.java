@@ -57,7 +57,8 @@ public class AlienFormController {
 	//======== REST API FUNCTIONS BELOW ========================
 	// jackson-core lib converts the alien objects to json response. 
 	
-	@RequestMapping(path="/aliens", produces={"application/xml"}) //only supports xml response now.  
+	//For below REST pt, we place restriction to only supports xml response, no other format allowed. 
+	@RequestMapping(path="/aliens", produces={"application/xml"})   
 	@ResponseBody
 	public List<Alien> getAllAliens() {
 		return repo.findAll();  
