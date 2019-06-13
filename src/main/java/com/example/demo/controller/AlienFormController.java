@@ -1,23 +1,24 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.dao.AlienRepo;
+import com.example.demo.dao.AlienJPARepo; //JpaRepository ... JSON based. 
 import com.example.demo.model.Alien;
 
 @Controller
 public class AlienFormController {
 
 	@Autowired
-	AlienRepo repo;  //Defines Crud interface. 
+	AlienJPARepo repo;  //Defines Crud interface. 
 	
 	//Show Form --------------------------
 	@RequestMapping("/")  
@@ -39,16 +40,39 @@ public class AlienFormController {
 		return mv; 
 	}
 	
-	// Process get alien ------------------
+	// Process get alien -----------------
 	@RequestMapping("/getAlien") 
-	public ModelAndView getAlien(@RequestParam("aid") int id) { 
+	public ModelAndView getAlien(int aid) { 
+		Alien alien = repo.findById(aid).orElse(null);
 		
-		Alien alien = (Alien) repo.findById(id).orElse(null);
-		
-		List<Alien> alienlist = (alien == null) ? new ArrayList<>() : Arrays.asList(alien); 
+		List<Alien> alien_list = new ArrayList<Alien>();
+		if (alien != null) alien_list.add(alien); //else it's an empty list
+
 		ModelAndView mv = new ModelAndView("showAliens");
-		mv.addObject("alienlist", alienlist );
-		
+		mv.addObject("alienlist", alien_list);
 		return mv; 
 	}
+	
+	
+	//======== REST API FUNCTIONS BELOW ========================
+	// jackson-core lib converts the alien objects to json response. 
+	
+	@RequestMapping("/aliens") 
+	@ResponseBody
+	public List<Alien> getAllAliens() {
+		return repo.findAll();  
+	}
+	
+	@RequestMapping("/aliens/{aid}") 
+	@ResponseBody
+	public Optional<Alien> getSpecificAlien(@PathVariable("aid") int aid) {
+		return repo.findById(aid);
+	}
+	
+	@RequestMapping("/aliens/tech/{tech}") 
+	@ResponseBody
+	public List<Alien> getAliensByTech(@PathVariable("tech") String tech) {
+		return repo.findByTech(tech);
+	}	
+	
 }

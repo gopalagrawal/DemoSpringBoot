@@ -46,7 +46,9 @@ SELECT * from Alien;
 
 Aliens Found: <p>
 
-<c:if test="${fn:length(alienlist) > 0}">
+<!--  c:if test="${fn:length(alienlist) > 0}" -->
+<c:if test="${not empty alienlist}">
+
 	<ul>
 		<c:forEach var="alien" items="${alienlist}">
 			<li>${alien.aid} ... ${alien.aname} ... ${alien.tech}</li>

@@ -2,6 +2,7 @@ package com.example.demo.dao;
 // THE SPRING JPA MAGIC //
 
 import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -27,4 +28,8 @@ public interface AlienRepo extends CrudRepository<Alien, Integer>
 Spring boot will automaticaly generate class based on above interface to implement
 our custom methods or CrudRepo methods. abstract
 */
+
+
+
+
 
