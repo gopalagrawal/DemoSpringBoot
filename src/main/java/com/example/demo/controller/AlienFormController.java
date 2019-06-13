@@ -7,14 +7,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.AlienJPARepo; //JpaRepository ... JSON based. 
 import com.example.demo.model.Alien;
 
-@Controller
+@Controller  //@RestController => @ResponseBody decorator applied to each method.  
 public class AlienFormController {
 
 	@Autowired
@@ -64,7 +66,7 @@ public class AlienFormController {
 		return repo.findAll();  
 	}
 	
-	@RequestMapping("/aliens/{aid}") 
+	@RequestMapping("/aliens/{aid}") //By default, a RequestMapping => GetMapping. 
 	@ResponseBody
 	public Optional<Alien> getSpecificAlien(@PathVariable("aid") int aid) {
 		return repo.findById(aid);
@@ -75,5 +77,13 @@ public class AlienFormController {
 	public List<Alien> getAliensByTech(@PathVariable("tech") String tech) {
 		return repo.findByTech(tech);
 	}	
+	
+	@PostMapping(path="/alien")  
+	@ResponseBody
+	public Alien addAlienUsingRest(Alien alien) {
+		System.out.println(alien.toString());
+		repo.save(alien);
+		return alien;
+	}
 	
 }
